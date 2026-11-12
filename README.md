@@ -117,6 +117,7 @@ Mova ou clone a pasta do projeto para o diretório público do seu servidor loca
 * Crie um banco de dados chamado `missin` com collation `utf8mb4_general_ci`.
 * Importe o script SQL de estrutura e população do banco.
 
+> **📦 Pacote de Mídias (Vídeos):** Devido ao limite de armazenamento do GitHub, os arquivos `.mp4` dos depoimentos e sinais avulsos estão hospedados externamente. [Clique aqui para baixar a pasta `videos` no Google Drive](https://drive.google.com/drive/folders/1oWPLlnMnxrjnamgM_Ky4ijfHo-4kN_Px?usp=sharing) e extraia o conteúdo dentro de `assets/videos/`.
 
 4. **Verificar Credenciais do Banco (`html/includes/db.php`):**
 ```php
