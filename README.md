@@ -5,7 +5,7 @@
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Em%20Valida%C3%A7%C3%A3o-yellow?style=for-the-badge)
 
-> **MISSIN** é um projeto de Trabalho de Conclusão de Curso (TCC) do **Bacharelado em Sistemas de Informação** do **Instituto Federal do Norte de Minas Gerais (IFNMG — Campus Pirapora)**, desenvolvido por mim, **Beatriz Souza**.
+> **MISSIN** é um projeto de Trabalho de Conclusão de Curso (TCC) do **Bacharelado em Sistemas de Informação** do **IFNMG — Campus Pirapora**, desenvolvido por mim, **Beatriz Souza**.
 
 ---
 
