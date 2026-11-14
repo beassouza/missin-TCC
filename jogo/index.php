@@ -98,9 +98,9 @@ if (isset($_GET['caso_concluido']) && isset($_SESSION['modal_caso_concluido'])) 
           <div class="col-lg-7">
             <div class="ratio ratio-16x9 rounded overflow-hidden shadow-lg bg-black">
               <iframe 
-                src="https://drive.google.com/file/d/1B0zd5eushdWXh1nSRmmDDGOIzrkarQ1m/preview" 
+                src="https://www.youtube.com/embed/iWKTpiT7sUM?rel=0" 
                 title="Videoaula Introdutória de LIBRAS"
-                allow="autoplay" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen>
               </iframe>
             </div>

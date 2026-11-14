@@ -119,15 +119,35 @@ foreach ($sinais as $sinal) {
                   <div class="modal-content bg-dark text-white border border-secondary shadow-lg">
                     
                     <div class="modal-header border-bottom border-secondary">
-                      <h5 class="modal-title fw-bold" id="label_<?php echo $modalId; ?>">Sinal: <?php echo htmlspecialchars($s['sinal']); ?></h5>
+                      <h5 class="modal-title fw-bold" id="label_<?php echo $modalId; ?>">Sinal: <?php echo htmlspecialchars($s['sinal'] ?? ''); ?></h5>
                       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <div class="modal-body text-center p-0 bg-black d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                        <!-- Utiliza a tag <video> com reprodução automática em loop -->
-                        <video src="<?php echo htmlspecialchars($s['midia_link']); ?>" controls autoplay loop muted playsinline class="img-fluid w-100" style="object-fit: contain; max-height: 500px;">
-                            Seu navegador não suporta a reprodução de vídeos.
+                      <?php 
+                        $midia_sinal = trim($s['midia_link'] ?? '');
+                        // Garante que qualquer link /view do Drive seja convertido para /preview
+                        if (strpos($midia_sinal, 'drive.google.com') !== false) {
+                            $midia_sinal = preg_replace('/\/view(\?.*)?$/', '/preview', $midia_sinal);
+                        }
+                      ?>
+
+                      <?php if (strpos($midia_sinal, 'drive.google.com') !== false || strpos($midia_sinal, 'youtube.com') !== false): ?>
+                        <iframe 
+                          src="<?php echo htmlspecialchars($midia_sinal); ?>" 
+                          title="Sinal em LIBRAS: <?php echo htmlspecialchars($s['sinal'] ?? ''); ?>"
+                          class="w-100 border-0"
+                          style="height: 420px;"
+                          loading="lazy"
+                          allow="autoplay; fullscreen" 
+                          allowfullscreen>
+                        </iframe>
+                      <?php else: ?>
+                        <!-- Fallback caso ainda exista algum arquivo .mp4 local -->
+                        <video src="<?php echo htmlspecialchars($midia_sinal); ?>" controls loop muted playsinline class="img-fluid w-100" style="object-fit: contain; max-height: 500px;">
+                          Seu navegador não suporta a reprodução de vídeos.
                         </video>
+                      <?php endif; ?>
                     </div>
                     
                     <div class="modal-footer border-top border-secondary bg-dark">
@@ -159,6 +179,17 @@ foreach ($sinais as $sinal) {
   <script src="../assets/js/custom.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+  <script>
+    document.addEventListener('hidden.bs.modal', function (event) {
+      const iframe = event.target.querySelector('iframe');
+      if (iframe) {
+        const src = iframe.src;
+        iframe.src = '';
+        iframe.src = src;
+      }
+    });
+  </script>
 </body>
 
 </html>

@@ -233,9 +233,9 @@ try {
           <?php 
           // Mapeamento dos vídeos dos enunciados
           $videos_enunciado = [
-              27 => '../assets/videos/quiz_final/v01.mp4',
-              28 => '../assets/videos/quiz_final/v02.mp4',
-              29 => '../assets/videos/quiz_final/v03.mp4'
+              27 => 'https://youtu.be/u4MbzVjPnPU',
+              28 => 'https://youtu.be/E2ID_PrNreE',
+              29 => 'https://youtu.be/MtnvUKl5K4U'
           ];
           ?>
 
@@ -248,35 +248,83 @@ try {
                 </h5>
               </div>
 
-              <div class="card-body p-4">
-                <!-- VÍDEO DO ENUNCIADO DA QUESTÃO -->
-                <?php if (isset($videos_enunciado[$q['pergunta_id']])): ?>
-                  <div class="ratio ratio-16x9 mb-4 bg-black rounded overflow-hidden shadow mx-auto" style="max-width: 600px;">
-                    <video controls class="w-100 h-100">
-                      <source src="<?php echo $videos_enunciado[$q['pergunta_id']]; ?>" type="video/mp4">
-                      Seu navegador não suporta vídeos.
+             <?php
+                $link_enunciado = $videos_enunciado[$q['pergunta_id']];
+
+                // Converte automaticamente links curtos (youtu.be/ID) ou normais (watch?v=ID) para o formato /embed/ID
+                if (strpos($link_enunciado, 'youtu.be/') !== false) {
+                    $video_id = strtok(basename($link_enunciado), '?');
+                    $link_enunciado = "https://www.youtube.com/embed/" . $video_id;
+                } elseif (strpos($link_enunciado, 'watch?v=') !== false) {
+                    parse_str(parse_url($link_enunciado, PHP_URL_QUERY), $params);
+                    if (!empty($params['v'])) {
+                        $link_enunciado = "https://www.youtube.com/embed/" . $params['v'];
+                    }
+                }
+                ?>
+
+                <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm bg-black mb-3">
+                  <?php if (strpos($link_enunciado, 'youtube.com/embed/') !== false): ?>
+                    <iframe 
+                      src="<?= htmlspecialchars($link_enunciado) ?>?rel=0" 
+                      title="Vídeo do enunciado da questão"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                      allowfullscreen>
+                    </iframe>
+                  <?php else: ?>
+                    <video controls preload="metadata" class="w-100 h-100">
+                      <source src="<?= htmlspecialchars($link_enunciado) ?>" type="video/mp4">
+                      Seu navegador não suporta a exibição deste vídeo.
                     </video>
-                  </div>
-                <?php endif; ?>
+                  <?php endif; ?>
+                </div>
 
                 <!-- ALTERNATIVAS DE RESPOSTA -->
                 <div class="d-flex flex-column gap-3">
                   <?php foreach ($q['alternativas'] as $alt): ?>
                     <label class="form-check-label border border-secondary rounded p-3 bg-white text-dark d-flex align-items-start gap-3 cursor-pointer shadow-sm">
                       <input class="form-check-input flex-shrink-0 mt-1" type="radio" 
-                             name="questao_<?php echo $q['pergunta_id']; ?>" 
-                             value="<?php echo $alt['id']; ?>" required>
+                            name="questao_<?php echo $q['pergunta_id']; ?>" 
+                            value="<?php echo $alt['id']; ?>" required>
                       
                       <div class="w-100">
                         <strong class="text-primary me-1"><?php echo $alt['letra']; ?>.</strong>
                         <span class="fw-medium"><?php echo htmlspecialchars($alt['texto']); ?></span>
 
-                        <!-- VÍDEO DA ALTERNATIVA (EX: Q3 - v03a.mp4 / v03b.mp4) -->
-                        <?php if (!empty($alt['midia_link'])): ?>
+                        <!-- VÍDEO DA ALTERNATIVA (SUPORTA YOUTUBE E MP4 LOCAL) -->
+                        <?php if (!empty(trim($alt['midia_link'] ?? ''))): ?>
+                          <?php
+                            $midia_url = trim($alt['midia_link'] ?? '');
+                            $eh_youtube = false;
+
+                            if (strpos($midia_url, 'youtu.be/') !== false) {
+                                $video_id = strtok(basename($midia_url), '?');
+                                $midia_url = "https://www.youtube.com/embed/" . $video_id;
+                                $eh_youtube = true;
+                            } elseif (strpos($midia_url, 'watch?v=') !== false) {
+                                parse_str(parse_url($midia_url, PHP_URL_QUERY), $params);
+                                if (!empty($params['v'])) {
+                                    $midia_url = "https://www.youtube.com/embed/" . $params['v'];
+                                    $eh_youtube = true;
+                                }
+                            } elseif (strpos($midia_url, 'youtube.com/embed/') !== false) {
+                                $eh_youtube = true;
+                            }
+                          ?>
+
                           <div class="ratio ratio-16x9 mt-3 bg-black rounded overflow-hidden shadow-sm" style="max-width: 360px;">
-                            <video controls loop muted playsinline class="w-100 h-100">
-                              <source src="<?php echo htmlspecialchars($alt['midia_link']); ?>" type="video/mp4">
-                            </video>
+                            <?php if ($eh_youtube): ?>
+                              <iframe 
+                                src="<?php echo htmlspecialchars($midia_url); ?>?rel=0" 
+                                title="Vídeo da alternativa <?php echo htmlspecialchars($alt['letra']); ?>"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                              </iframe>
+                            <?php else: ?>
+                              <video controls loop muted playsinline class="w-100 h-100">
+                                <source src="<?php echo htmlspecialchars($midia_url); ?>" type="video/mp4">
+                              </video>
+                            <?php endif; ?>
                           </div>
                         <?php endif; ?>
                       </div>
@@ -334,14 +382,32 @@ try {
           <?php else: ?>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
               <?php foreach ($sinais_introducao as $sinal): ?>
+                <?php
+                  $midia_vocab = trim($sinal['midia_link'] ?? '');
+                  if (strpos($midia_vocab, 'drive.google.com') !== false) {
+                      $midia_vocab = preg_replace('/\/view(\?.*)?$/', '/preview', $midia_vocab);
+                  }
+                  $eh_embed = (strpos($midia_vocab, 'drive.google.com') !== false || strpos($midia_vocab, 'youtube.com') !== false);
+                ?>
                 <div class="col">
-                  <div class="card h-100 border shadow-sm text-center">
-                    <div class="card-img-top bg-black p-2 d-flex align-items-center justify-content-center" style="height: 180px;">
-                      <video src="<?php echo htmlspecialchars($sinal['midia_link']); ?>" controls loop muted playsinline class="mw-100 mh-100 rounded"></video>
+                  <div class="card h-100 border shadow-sm text-center overflow-hidden">
+                    <div class="card-img-top bg-black p-1 d-flex align-items-center justify-content-center" style="height: 220px;">
+                      <?php if ($eh_embed): ?>
+                        <iframe 
+                          src="<?php echo htmlspecialchars($midia_vocab); ?>" 
+                          title="Sinal em LIBRAS: <?php echo htmlspecialchars($sinal['sinal'] ?? ''); ?>"
+                          class="w-100 h-100 border-0 rounded"
+                          loading="lazy"
+                          allow="autoplay; fullscreen" 
+                          allowfullscreen>
+                        </iframe>
+                      <?php else: ?>
+                        <video src="<?php echo htmlspecialchars($midia_vocab); ?>" controls loop muted playsinline class="mw-100 mh-100 rounded"></video>
+                      <?php endif; ?>
                     </div>
                     <div class="card-body py-2">
-                      <h5 class="fw-bold text-dark mb-1"><?php echo htmlspecialchars($sinal['sinal']); ?></h5>
-                      <p class="text-muted small mb-0"><?php echo htmlspecialchars($sinal['definicao']); ?></p>
+                      <h5 class="fw-bold text-dark mb-1"><?php echo htmlspecialchars($sinal['sinal'] ?? ''); ?></h5>
+                      <p class="text-muted small mb-0"><?php echo htmlspecialchars($sinal['definicao'] ?? ''); ?></p>
                     </div>
                   </div>
                 </div>
@@ -356,11 +422,13 @@ try {
           <p class="text-muted">Assista ao depoimento com atenção para extrair pistas sobre o paradeiro de Ana.</p>
           
           <?php if ($video_atual): ?>
-            <div class="ratio ratio-16x9 my-4 bg-black rounded overflow-hidden shadow">
-              <video controls autoplay class="w-100 h-100">
-                <source src="<?php echo htmlspecialchars($video_atual['video_link']); ?>" type="video/mp4">
-                Seu navegador não suporta a reprodução deste vídeo.
-              </video>
+            <div class="ratio ratio-16x9 rounded overflow-hidden shadow-lg bg-black">
+              <iframe 
+                src="<?= htmlspecialchars($video_atual['video_link']) ?>?rel=0" 
+                title="Depoimento em LIBRAS"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+              </iframe>
             </div>
             <h5 class="fw-bold text-dark"><?php echo htmlspecialchars($video_atual['titulo']); ?></h5>
           <?php else: ?>
