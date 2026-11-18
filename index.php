@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0 ; url = './html/index.html'" />
+    <meta http-equiv="refresh" content="0 ; url = './html/index.php'" />
     <title>Missin</title>
     <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logo-dark.png" />
     <link rel="stylesheet" href="./assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">

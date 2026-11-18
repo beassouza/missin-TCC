@@ -159,19 +159,18 @@ INSERT INTO `missao` (`id`, `unidade_id`, `titulo`, `ordem`) VALUES
 -- 5. Tabela `video`
 -- --------------------------------------------------------
 INSERT INTO `video` (`id`, `missao_id`, `titulo`, `parte`, `video_link`) VALUES
-(1, 1, 'Depoimento 001 Parte I', 1, '../assets/videos/depoimentos/DEPOIMENTO 001 - PARTE I.mp4'),
-(2, 1, 'Depoimento 001 Parte II', 2, '../assets/videos/depoimentos/DEPOIMENTO 001 - PARTE II.mp4'),
-(3, 1, 'Depoimento 001 Parte III', 3, '../assets/videos/depoimentos/DEPOIMENTO 001 - PARTE III.mp4'),
-(4, 1, 'Depoimento 001 Parte IV', 4, '../assets/videos/depoimentos/DEPOIMENTO 001 - PARTE IV.mp4'),
-(5, 2, 'Depoimento 002 Parte I', 1, '../assets/videos/depoimentos/DEPOIMENTO 002 - PARTE I.mp4'),
-(6, 2, 'Depoimento 002 Parte II', 2, '../assets/videos/depoimentos/DEPOIMENTO 002 - PARTE II.mp4'),
-(7, 2, 'Depoimento 002 Parte III', 3, '../assets/videos/depoimentos/DEPOIMENTO 002 - PARTE III.mp4'),
-(8, 2, 'Depoimento 002 Parte IV', 4, '../assets/videos/depoimentos/DEPOIMENTO 002 - PARTE IV.mp4'),
-(9, 3, 'Depoimento 003 Parte I', 1, '../assets/videos/depoimentos/DEPOIMENTO 003 - PARTE I.mp4'),
-(10, 3, 'Depoimento 003 Parte II', 2, '../assets/videos/depoimentos/DEPOIMENTO 003 - PARTE II.mp4'),
-(11, 3, 'Depoimento 003 Parte III', 3, '../assets/videos/depoimentos/DEPOIMENTO 003 - PARTE III.mp4'),
-(12, 3, 'Depoimento 003 Parte IV', 4, '../assets/videos/depoimentos/DEPOIMENTO 003 - PARTE IV.mp4');
-
+(1, 1, ' ', 1, 'https://www.youtube.com/embed/5A29cWQri-E'),
+(2, 1, ' ', 2, 'https://www.youtube.com/embed/oBDinJh95kw'),
+(3, 1, ' ', 3, 'https://www.youtube.com/embed/YfemB_AbjTg'),
+(4, 1, ' ', 4, 'https://www.youtube.com/embed/ONOSRskPS3k'),
+(5, 2, ' ', 1, 'https://www.youtube.com/embed/DTVAILIv_GI'),
+(6, 2, ' ', 2, 'https://www.youtube.com/embed/sNH9P35wyQI'),
+(7, 2, ' ', 3, 'https://www.youtube.com/embed/oc5zjQThNqo'),
+(8, 2, ' ', 4, 'https://www.youtube.com/embed/85VkVuzLsNU'),
+(9, 3, ' ', 1, 'https://www.youtube.com/embed/gwfqwpIMHgA'),
+(10, 3, ' ', 2, 'https://www.youtube.com/embed/aXegaHVNouk'),
+(11, 3, ' ', 3, 'https://www.youtube.com/embed/QxedTcIimr8'),
+(12, 3, ' ', 4, 'https://www.youtube.com/embed/bEyptAyvOtk');
 
 -- --------------------------------------------------------
 -- 6. Tabela `quiz_historia`
@@ -328,8 +327,8 @@ INSERT INTO `alternativa_historia` (`id`, `pergunta_id`, `letra`, `texto`, `midi
 (105, 28, 'B', 'Um amigo da família do ex-namorado contou.', NULL, 0),
 (106, 28, 'C', 'Por meio da mãe de Marina, porque ela achou melhor que as autoridades soubessem.', NULL, 0),
 (107, 28, 'D', 'Por meio de Marina, porque ela precisou levar Ana para o hospital.', NULL, 1),
-(108, 29, 'A', 'https://youtu.be/EGn6SHyKiUE', ' ', 0),
-(109, 29, 'B', 'https://youtu.be/M_YhS7Zt-8Y', ' ', 1);
+(108, 29, 'A', ' ', 'https://youtu.be/EGn6SHyKiUE', 0),
+(109, 29, 'B', ' ', 'https://youtu.be/M_YhS7Zt-8Y', 1);
 
 -- --------------------------------------------------------
 -- 9. Tabela `introducao`
