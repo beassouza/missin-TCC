@@ -87,7 +87,7 @@ INSERT INTO `dicionario` (`id`, `sinal`, `definicao`, `categoria`, `midia_link`)
 (84, 'Opor/Contra', 'Sinal referente a ser contrário ou contra algo.', 'O', 'https://drive.google.com/file/d/1h4Y2IEl30OLLPLfirKiDZ6R-s723E-Kc/preview'),
 (85, 'Ou', 'Conjunção alternativa.', 'O', 'https://drive.google.com/file/d/1i1YQwT6JR9IjQR1VysWkn41HfDdXSCPq/preview'),
 (86, 'Outro', 'Sinal indicando elemento diferente ou adicional.', 'O', 'https://drive.google.com/file/d/1EjPuABTIDRJ1gvmRD8e8ejHH0H-iPzF7/preview'),
-(87, 'Paciência', 'Sinal referente à virtude da paciência.', 'P', 'https://drive.google.com/file/d/1Hmp8XdYmTdA8qykUBNkWJH3hK8GrNZsL/preview'),
+(87, 'Esperar', 'Sinal referente a aguardar.', 'E', 'https://drive.google.com/file/d/1Hmp8XdYmTdA8qykUBNkWJH3hK8GrNZsL/preview'),
 (88, 'País', 'Sinal referente a uma nação ou país.', 'P', 'https://drive.google.com/file/d/1a2PHSROQQO5hAzZ7lZkCxOI11pratb8W/preview'),
 (89, 'Passar', 'Sinal indicando atravessar ou transcorrer.', 'P', 'https://drive.google.com/file/d/1DIWPPnK6zs0SSG5ru0fd6ohufb0X8Mzf/preview'),
 (90, 'Perguntar', 'Sinal referente ao ato de fazer uma questão.', 'P', 'https://drive.google.com/file/d/1IxKNP390DonbllhyFbWq_3_JouG2QzPN/preview'),

@@ -375,39 +375,37 @@ try {
         <!-- ABA 1: VOCABULÁRIO PRÉVIO -->
         <div class="tab-pane fade show active" id="quiz1-content" role="tabpanel">
           <h3 class="fw-bold text-dark mb-2">Preparação do Investigador</h3>
-          <p class="text-muted mb-4">Estude os sinais em Libras apresentados abaixo antes de analisar esta etapa do depoimento.</p>
+          <p class="text-muted mb-4">Toque ou clique em cada sinal abaixo para assistir à demonstração em Libras antes de analisar o depoimento.</p>
           
           <?php if (empty($sinais_introducao)): ?>
             <div class="alert alert-info">Nenhum sinal específico cadastrado para a Parte <?php echo $parte_ativa; ?>. Assista ao vídeo diretamente na Aba 2.</div>
           <?php else: ?>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
               <?php foreach ($sinais_introducao as $sinal): ?>
                 <?php
-                  $midia_vocab = trim($sinal['midia_link'] ?? '');
-                  if (strpos($midia_vocab, 'drive.google.com') !== false) {
-                      $midia_vocab = preg_replace('/\/view(\?.*)?$/', '/preview', $midia_vocab);
+                  $link_drive = trim($sinal['midia_link'] ?? '');
+                  // Garante que abra no visualizador padrão (/view) do Google Drive
+                  if (strpos($link_drive, 'drive.google.com') !== false) {
+                      $link_drive = preg_replace('/\/preview(\?.*)?$/', '/view', $link_drive);
                   }
-                  $eh_embed = (strpos($midia_vocab, 'drive.google.com') !== false || strpos($midia_vocab, 'youtube.com') !== false);
                 ?>
                 <div class="col">
-                  <div class="card h-100 border shadow-sm text-center overflow-hidden">
-                    <div class="card-img-top bg-black p-1 d-flex align-items-center justify-content-center" style="height: 220px;">
-                      <?php if ($eh_embed): ?>
-                        <iframe 
-                          src="<?php echo htmlspecialchars($midia_vocab); ?>" 
-                          title="Sinal em LIBRAS: <?php echo htmlspecialchars($sinal['sinal'] ?? ''); ?>"
-                          class="w-100 h-100 border-0 rounded"
-                          loading="lazy"
-                          allow="autoplay; fullscreen" 
-                          allowfullscreen>
-                        </iframe>
-                      <?php else: ?>
-                        <video src="<?php echo htmlspecialchars($midia_vocab); ?>" controls loop muted playsinline class="mw-100 mh-100 rounded"></video>
-                      <?php endif; ?>
-                    </div>
-                    <div class="card-body py-2">
-                      <h5 class="fw-bold text-dark mb-1"><?php echo htmlspecialchars($sinal['sinal'] ?? ''); ?></h5>
+                  <div class="card h-100 border border-secondary-subtle shadow-sm d-flex flex-column justify-content-between">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                        <h5 class="fw-bold text-dark mb-0"><?php echo htmlspecialchars($sinal['sinal'] ?? ''); ?></h5>
+                        <span class="badge bg-primary text-dark">LIBRAS</span>
+                      </div>
                       <p class="text-muted small mb-0"><?php echo htmlspecialchars($sinal['definicao'] ?? ''); ?></p>
+                    </div>
+                    <div class="card-footer bg-light border-top-0 pt-0 pb-3">
+                      <a href="<?php echo htmlspecialchars($link_drive); ?>" 
+                         target="_blank" 
+                         rel="noopener noreferrer"
+                         class="btn btn-dark w-100 fw-semibold d-flex align-items-center justify-content-center gap-2 py-2">
+                        <iconify-icon icon="solar:play-circle-bold" class="fs-5 text-primary"></iconify-icon>
+                        Ver Sinal
+                      </a>
                     </div>
                   </div>
                 </div>

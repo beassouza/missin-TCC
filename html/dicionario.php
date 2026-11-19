@@ -70,99 +70,37 @@ foreach ($sinais as $sinal) {
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-10">
             
             <?php foreach ($listaDeSinais as $s): ?>
-              <?php $modalId = "modalSinal_" . $s['id']; ?>
-              
-              <div class="col" data-aos="fade-up" data-aos-duration="1000">
-                <div class="card h-100 border border-secondary shadow-lg rounded-3 overflow-hidden bg-dark text-white">
-                  
-                  <div class="bg-black d-flex align-items-center justify-content-center border-bottom border-secondary" style="height: 180px; position: relative;">
-                    
-                    <button type="button" 
-                            class="btn d-flex align-items-center justify-content-center shadow border-0" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#<?php echo $modalId; ?>" 
-                            style="
-                              width: 60px; height: 60px; 
-                              max-width: 60px; max-height: 60px;
-                              min-width: 60px; min-height: 60px;
-                              background-color: #ccff66; 
-                              border-radius: 50% !important;
-                              padding: 0; position: absolute;
-                              top: 50%; left: 50%;
-                              transform: translate(-50%, -50%);
-                            ">
-                      <span style="
-                        display: inline-block; width: 0; height: 0; 
-                        border-top: 8px solid transparent;
-                        border-bottom: 8px solid transparent;
-                        border-left: 14px solid #1a1a1a;
-                        margin-left: 4px;
-                      "></span>
-                    </button>
-                    
-                  </div>
-
-                  <div class="card-body text-center py-4 bg-white text-dark">
-                    <h4 class="card-title fw-bold mb-2">
-                        <?php echo htmlspecialchars($s['sinal']); ?>
-                    </h4>
-                    <?php if(!empty($s['definicao'])): ?>
-                        <p class="text-muted small mb-0 px-2"><?php echo htmlspecialchars($s['definicao']); ?></p>
-                    <?php endif; ?>
-                  </div>
-
+            <?php 
+              $link_drive = trim($s['midia_link'] ?? '');
+              if (strpos($link_drive, 'drive.google.com') !== false) {
+                  $link_drive = preg_replace('/\/preview(\?.*)?$/', '/view', $link_drive);
+              }
+            ?>
+            <div class="col" data-aos="fade-up" data-aos-duration="1000">
+              <div class="card h-100 border border-secondary shadow-lg rounded-3 overflow-hidden bg-dark text-white">
+                <div class="bg-black d-flex align-items-center justify-content-center border-bottom border-secondary" style="height: 180px; position: relative;">
+                  <a href="<?php echo htmlspecialchars($link_drive); ?>"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     title="Assistir sinal: <?php echo htmlspecialchars($s['sinal'] ?? ''); ?>"
+                     class="btn d-flex align-items-center justify-content-center shadow border-0"
+                     style="width: 60px; height: 60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px; background-color: #33ccff66; border-radius: 50% !important; padding: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+                    <span style="display: inline-block; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 14px solid #1a1a1a; margin-left: 4px;"></span>
+                  </a>
+                </div>
+                <div class="card-body text-center py-4 bg-white text-dark">
+                  <h4 class="card-title fw-bold mb-2">
+                    <?php echo htmlspecialchars($s['sinal'] ?? ''); ?>
+                  </h4>
+                  <?php if(!empty($s['definicao'])): ?>
+                    <p class="text-muted small mb-0 px-2"><?php echo htmlspecialchars($s['definicao']); ?></p>
+                  <?php endif; ?>
                 </div>
               </div>
-
-              <div class="modal fade" id="<?php echo $modalId; ?>" tabindex="-1" aria-labelledby="label_<?php echo $modalId; ?>" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content bg-dark text-white border border-secondary shadow-lg">
-                    
-                    <div class="modal-header border-bottom border-secondary">
-                      <h5 class="modal-title fw-bold" id="label_<?php echo $modalId; ?>">Sinal: <?php echo htmlspecialchars($s['sinal'] ?? ''); ?></h5>
-                      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    
-                    <div class="modal-body text-center p-0 bg-black d-flex align-items-center justify-content-center" style="min-height: 400px;">
-                      <?php 
-                        $midia_sinal = trim($s['midia_link'] ?? '');
-                        // Garante que qualquer link /view do Drive seja convertido para /preview
-                        if (strpos($midia_sinal, 'drive.google.com') !== false) {
-                            $midia_sinal = preg_replace('/\/view(\?.*)?$/', '/preview', $midia_sinal);
-                        }
-                      ?>
-
-                      <?php if (strpos($midia_sinal, 'drive.google.com') !== false || strpos($midia_sinal, 'youtube.com') !== false): ?>
-                        <iframe 
-                          src="<?php echo htmlspecialchars($midia_sinal); ?>" 
-                          title="Sinal em LIBRAS: <?php echo htmlspecialchars($s['sinal'] ?? ''); ?>"
-                          class="w-100 border-0"
-                          style="height: 420px;"
-                          loading="lazy"
-                          allow="autoplay; fullscreen" 
-                          allowfullscreen>
-                        </iframe>
-                      <?php else: ?>
-                        <!-- Fallback caso ainda exista algum arquivo .mp4 local -->
-                        <video src="<?php echo htmlspecialchars($midia_sinal); ?>" controls loop muted playsinline class="img-fluid w-100" style="object-fit: contain; max-height: 500px;">
-                          Seu navegador não suporta a reprodução de vídeos.
-                        </video>
-                      <?php endif; ?>
-                    </div>
-                    
-                    <div class="modal-footer border-top border-secondary bg-dark">
-                      <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-            <?php endforeach; ?>
-
+            </div>
+          <?php endforeach; ?>
           </div>
         <?php endforeach; ?>
-
       </div>
     </section>
 
@@ -179,17 +117,7 @@ foreach ($sinais as $sinal) {
   <script src="../assets/js/custom.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-
-  <script>
-    document.addEventListener('hidden.bs.modal', function (event) {
-      const iframe = event.target.querySelector('iframe');
-      if (iframe) {
-        const src = iframe.src;
-        iframe.src = '';
-        iframe.src = src;
-      }
-    });
-  </script>
+</script>
 </body>
 
 </html>

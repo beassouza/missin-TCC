@@ -17,6 +17,22 @@ Por meio de uma narrativa investigativa dividida em módulos e missões ("Casos"
 
 ---
 
+## 🌐 Acesse o Projeto Online (Deploy)
+
+A plataforma **MISSIN** está publicada e disponível para acesso em ambiente de produção:
+
+🔗 **Link de acesso:** [missin.grupoaliancas.com.br](https://missin.grupoaliancas.com.br)
+
+[![Status do Site](https://img.shields.io/badge/Status-Online-brightgreen?style=for-the-badge)](https://missin.grupoaliancas.com.br)
+[![Deploy](https://img.shields.io/badge/Hospedagem-Apache%20%2B%20PHP%20%2B%20MySQL-blue?style=for-the-badge)](https://missin.grupoaliancas.com.br)
+
+### ✨ O que está disponível na versão online:
+* **Dicionário Interativo de Libras:** Mais de 120 sinais organizados de A a Z com definições e demonstrações em vídeo.
+* **Modo Investigação (Gamificação):** Missões e depoimentos em Libras com sistema de progresso, desbloqueio de etapas e quizzes avaliativos.
+* **Design Responsivo:** Interface adaptada para computadores e dispositivos móveis.
+
+---
+
 ## 🎯 Objetivos
 
 - **Inclusão e Empatia:** Promover o aprendizado acessível de LIBRAS para aproximar ouvintes da Comunidade Surda Brasileira.
@@ -174,7 +190,7 @@ DROP TABLE IF EXISTS `usuario`;
 
 ## 📜 Licença e Créditos
 
-Este projeto foi desenvolvido exclusivamente para fins **acadêmicos, educacionais e de utilidade pública gratuita**.
+Este projeto foi desenvolvido exclusivamente para fins **acadêmicos, educacionais e de utilidade pública gratuita**. Mas os vídeos presentes no trabalho e imagens das realizadoras não podem ser comercializados e nem utilizados em qualquer projeto sem autorização prévia por parte da autora do MISSIN.   
 
 * **Recursos Visuais:** Imagens e ícones obtidos através das plataformas Unsplash, Pixabay e Iconify.
 * **Template Base:** Adaptado a partir do tema *Studiova* ([ThemeWagon](https://themewagon.com/themes/studiova/)).
