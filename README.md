@@ -9,14 +9,6 @@
 
 ---
 
-## 📌 Sobre o Projeto
-
-O **MISSIN** é uma plataforma web interativa e gamificada projetada para auxiliar pessoas ouvintes a aprenderem a **Língua Brasileira de Sinais (LIBRAS)** de forma divertida, gratuita e próxima da "vida real" da pessoa surda.
-
-Por meio de uma narrativa investigativa dividida em módulos e missões ("Casos"), o usuário assume o papel de um investigador criminal encarregado de desvendar mistérios — como o desaparecimento de Ana — analisando depoimentos gravados inteiramente em LIBRAS e respondendo a quizzes de compreensão.
-
----
-
 ## 🌐 Acesse o Projeto Online (Deploy)
 
 A plataforma **MISSIN** está publicada e disponível para acesso em ambiente de produção:
@@ -26,10 +18,13 @@ A plataforma **MISSIN** está publicada e disponível para acesso em ambiente de
 [![Status do Site](https://img.shields.io/badge/Status-Online-brightgreen?style=for-the-badge)](https://missin.grupoaliancas.com.br)
 [![Deploy](https://img.shields.io/badge/Hospedagem-Apache%20%2B%20PHP%20%2B%20MySQL-blue?style=for-the-badge)](https://missin.grupoaliancas.com.br)
 
-### ✨ O que está disponível na versão online:
-* **Dicionário Interativo de Libras:** Mais de 120 sinais organizados de A a Z com definições e demonstrações em vídeo.
-* **Modo Investigação (Gamificação):** Missões e depoimentos em Libras com sistema de progresso, desbloqueio de etapas e quizzes avaliativos.
-* **Design Responsivo:** Interface adaptada para computadores e dispositivos móveis.
+---
+
+## 📌 Sobre o Projeto
+
+O **MISSIN** é uma plataforma web interativa e gamificada projetada para auxiliar pessoas ouvintes a aprenderem a **Língua Brasileira de Sinais (LIBRAS)** de forma divertida, gratuita e próxima da "vida real" da pessoa surda.
+
+Por meio de uma narrativa investigativa dividida em módulos e missões ("Casos"), o usuário assume o papel de um investigador criminal encarregado de desvendar mistérios — como o desaparecimento de Ana — analisando depoimentos gravados inteiramente em LIBRAS e respondendo a quizzes de compreensão.
 
 ---
 
